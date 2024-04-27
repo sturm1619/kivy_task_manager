@@ -132,7 +132,7 @@ class TaskManagerApp(App):
 
             date_button = DateButton()
             date_button.date = date
-            date_button.text = f"{date_button.date: %a, %m %d}"
+            date_button.text = f"{date_button.date: %a, %b %d}"
             date_button.taskList = date_tasks
             if date_button.taskList != []:
                 date_button.background_color = "blue"
@@ -346,7 +346,7 @@ class TaskManagerApp(App):
         dateScreen.taskListBoxLayout = BoxLayout(orientation="vertical")
         dateScreen.boxLayout.add_widget(dateScreen.taskListBoxLayout)
 
-        dateScreen.calendar_button = Button(text="Go back to month", background_color = "red")
+        dateScreen.calendar_button = Button(text="Go back to month", font_size = 48, background_color = "red")
         dateScreen.calendar_button.bind(on_press=self.go_to_calendar)
         dateScreen.boxLayout.add_widget(dateScreen.calendar_button)
 
