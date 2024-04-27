@@ -35,6 +35,12 @@ class ChildBox(BoxLayout):
 
 class DateButton(Button):
     def switch_to_date(self, instance):
+        for date in list(App.get_running_app().calendar):
+                    date_tasks = []
+                    for task in App.get_running_app().taskList:
+                        if task.due_date == date.isoformat():
+                            date_tasks.append(task)
+
         App.get_running_app().dateScreen.date_label.text = f"{self.date: %A, %B %dth, %Y}"
         App.get_running_app().dateScreen.taskListBoxLayout.clear_widgets()
         for task in self.taskList:
@@ -77,50 +83,9 @@ class TaskManagerApp(App):
         """CALENDAR FUNCTIONALITY"""
         self.calendar = list(Calendar(firstweekday=6).itermonthdates(datetime.date.today().year, datetime.date.today().month))
 
-        self.calendarScreen = Screen(name="calendar")
+        self.calendarScreen = self.build_CalendarScreen()
 
-        calendar_layout = BoxLayout(orientation="vertical")
-        calendar_layout.add_widget(Button(text="To Do Calendar", size_hint_y = 0.1, background_color="green"))
-        calendar_gui = GridLayout(cols=7)
-
-        for date in list(self.calendar):
-            date_tasks = []
-            for task in self.taskList:
-                if task.due_date == date.isoformat():
-                    date_tasks.append(task)
-
-            date_button = DateButton()
-            date_button.date = date
-            date_button.text = f"{date_button.date: %a, %m %d}"
-            date_button.taskList = date_tasks
-            if date_button.taskList != []:
-                date_button.background_color = "blue"
-            else:
-                date_button.background_color = "yellow"
-            date_button.bind(on_press = date_button.switch_to_date)
-            calendar_gui.add_widget(date_button)
-
-        calendar_layout.add_widget(calendar_gui)
-        go_to_main_button = Button(text="Go to Main Screen", size_hint_y = 0.1, background_color = "red")
-        go_to_main_button.bind(on_press = self.go_to_main)
-        calendar_layout.add_widget(go_to_main_button)
-        self.calendarScreen.add_widget(calendar_layout)
-
-        self.dateScreen = Screen(name="date")    
-
-        self.dateScreen.boxLayout = BoxLayout(orientation="vertical")
-
-        self.dateScreen.date_label = Label(text="", font_size = 48)
-        self.dateScreen.boxLayout.add_widget(self.dateScreen.date_label)
-
-        self.dateScreen.taskListBoxLayout = BoxLayout(orientation="vertical")
-        self.dateScreen.boxLayout.add_widget(self.dateScreen.taskListBoxLayout)
-
-        self.dateScreen.calendar_button = Button(text="Go back to month", background_color = "red")
-        self.dateScreen.calendar_button.bind(on_press=self.go_to_calendar)
-        self.dateScreen.boxLayout.add_widget(self.dateScreen.calendar_button)
-
-        self.dateScreen.add_widget(self.dateScreen.boxLayout)
+        self.dateScreen = self.build_DateScreen()
 
         self.screenManager.add_widget(self.calendarScreen)
         self.screenManager.add_widget(self.dateScreen)
@@ -350,13 +315,44 @@ class TaskManagerApp(App):
         return addEditTaskScreen
 
     def build_CalendarScreen(self) -> Screen:
+
+
+        calendar_layout = BoxLayout(orientation="vertical")
         
+        calendar_layout.add_widget(Button(text="To Do Calendar", size_hint_y = 0.1, background_color="green"))
         
+        calendar_gui = self.build_CalendarGUI()
+        calendar_layout.add_widget(calendar_gui)
+
+        go_to_main_button = Button(text="Go to Main Screen", size_hint_y = 0.1, background_color = "red")
+        go_to_main_button.bind(on_press = self.go_to_main)
+        calendar_layout.add_widget(go_to_main_button)
         
-        calendarScreen = Screen()
+        calendarScreen = Screen(name="calendar")        
+        calendarScreen.add_widget(calendar_layout)
 
         return calendarScreen
 
+
+    def build_DateScreen(self) -> Screen:
+
+        dateScreen = Screen(name="date")  
+        
+        dateScreen.boxLayout = BoxLayout(orientation="vertical")
+
+        dateScreen.date_label = Label(text="", font_size = 48)
+        dateScreen.boxLayout.add_widget(dateScreen.date_label)
+
+        dateScreen.taskListBoxLayout = BoxLayout(orientation="vertical")
+        dateScreen.boxLayout.add_widget(dateScreen.taskListBoxLayout)
+
+        dateScreen.calendar_button = Button(text="Go back to month", background_color = "red")
+        dateScreen.calendar_button.bind(on_press=self.go_to_calendar)
+        dateScreen.boxLayout.add_widget(dateScreen.calendar_button)
+
+        dateScreen.add_widget(dateScreen.boxLayout)
+
+        return dateScreen
     # def get_task_info(self) -> None:
     #     pass
 
@@ -374,6 +370,12 @@ class TaskManagerApp(App):
         ''' Add new MainScreen'''
         self.screenManager.add_widget(self.mainScreen)
 
+        self.screenManager.remove_widget(self.calendarScreen)
+
+        self.calendarScreen = self.build_CalendarScreen()
+
+        self.screenManager.add_widget(self.calendarScreen)
+
         ''' Move to new MainScreen'''
         self.screenManager.current = 'main'
 
@@ -390,7 +392,7 @@ class TaskManagerApp(App):
     def go_to_calendar(self, instance):
         self.screenManager.remove_widget(self.calendarScreen)
 
-        self.calendarScreen = self.build_ClendarScreen()
+        self.calendarScreen = self.build_CalendarScreen()
 
         self.screenManager.add_widget(self.calendarScreen)
 
