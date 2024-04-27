@@ -1,0 +1,176 @@
+<ChildBox>:
+	# This item is static!!!
+
+	orientation: 'vertical'
+
+	# Button:
+	# 	text: '   Task\nDetails'
+	# 	font_size: 48
+	# 	background_color: 'blue'
+	# 	on_press: root.parent.parent.manager.current = 'taskDetails'
+
+	Label:
+		text: 'Task Manager'
+		halign: "center"
+		font_size: 48
+		background_color: "blue"
+
+	BoxLayout:
+		orientation: "horizontal"
+
+		Button:
+			text: 'Create\n Task'
+			font_size: 24
+			background_color: "yellow"
+			on_press: root.parent.parent.manager.current = 'add'
+		
+		Button:
+			text: "Save List"
+			font_size: 24
+			background_color: "green"
+			on_press: app.save_list_into_json()
+
+		Button:
+			text: "Calendar\nView"
+			font_size: 24
+			background_color: "blue"
+			on_press: root.parent.parent.manager.current = 'calendar'
+
+	Label:
+		text: 'Quick New Task'
+		padding: [0,100,0,0]
+		font_size: 24
+
+	TextInput:
+		id: input_new_task_field
+		size_hint_y: 0.3
+		font_size: 18
+
+	Button:
+		text: 'Add new task'
+		font_size: 24
+		on_press: app.quick_new_task()
+
+# <TaskDetailsScreen>:
+# 	name: 'taskDetails'
+
+# 	BoxLayout:
+# 		orientation: 'vertical'
+# 		id: 'superBox'
+
+# 		Button:
+# 			text: 'Task Details'
+# 			font_size: 48
+# 			on_press: root.manager.current = 'main'
+
+# 		BoxLayout:
+# 			id: 'nameBox'
+# 			orientation: 'horizontal'
+
+# 			Label:
+# 				id: 'name_label'
+# 				text: 'Name: '
+
+# 			TextInput:
+# 				id: 'name_input'
+# 				text: app.current_task.name
+
+# 		BoxLayout:
+# 			id: 'descriptionBox'
+# 			orientation: 'horizontal'
+
+# 			Label:
+# 				id: 'desription_label'
+# 				text: 'Description:'
+
+# 			TextInput:
+# 				id: 'description_input'
+# 				text: app.current_task.description
+
+# 		BoxLayout:
+# 			id: 'dateBox'
+# 			orientation: 'horizontal'
+# 			size_hint_y: 0.25
+# 			background_color: 'white'
+
+# 			Label:
+# 				id: 'date_label'
+# 				text: 'Due Date: '
+
+# 			TextInput:
+# 				id: 'date_input'
+# 				text: app.current_task.due_date
+
+# 			Label:
+# 				id: 'status_label'
+# 				text: 'Completed'
+
+# 			CheckBox:
+# 				id: 'status_input'
+
+# 		BoxLayout:
+# 			id: 'manageBox'
+# 			orientation: 'horizontal'
+
+# 			Button:
+# 				id: 'save_button'
+# 				text: 'Add changes'
+# 				# on_press: 
+
+# 			Button:
+# 				id: 'delete_button'
+# 				text: 'Delete task'
+# 				# on_press: 
+
+# <AddEditTaskScreen>:
+# 	name: 'add'
+# 	BoxLayout:
+# 		orientation: 'vertical'
+
+# 		Button:
+# 			text: "Create New Task"
+# 			font_size: 24
+# 			on_press: root.manager.current = 'main'
+
+# 		BoxLayout:
+# 			id: 'titleBox'
+# 			size_hint_y: 0.2
+
+# 			Label:
+# 				id: 'title_label'
+# 				size_hint_x: 0.45
+# 				text: 'Title'
+# 				font_size: 16
+
+# 			TextInput:
+# 				id: 'title_input'
+
+# 		BoxLayout:
+# 			id: 'descriptionBox'
+# 			# size_hint_y: 0.2
+
+# 			Label:
+# 				id: 'description_label'
+# 				size_hint_x: 0.45
+# 				text: 'Description: '
+# 				font_size: 16
+
+# 			TextInput:
+# 				id: 'description_input'
+
+# 		BoxLayout:
+# 			id: 'dueBox'
+# 			size_hint_y: 0.2
+# 			Label:
+# 				id: 'due_label'
+# 				size_hint_x: 0.45
+# 				text: 'Due Date'
+
+# 			TextInput:
+# 				id: 'due_input'
+
+# 		Button:
+# 			id: 'create_task'
+# 			text: 'Create New Task'
+# 			font_size: 24
+# 			# on_press: app.append_task()
