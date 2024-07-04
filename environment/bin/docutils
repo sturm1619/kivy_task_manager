@@ -1,0 +1,8 @@
+#!/home/sturm/sturm_port/school/s24/cs1410/final_project/task_manager/environment/bin/python
+# -*- coding: utf-8 -*-
+import re
+import sys
+from docutils.__main__ import main
+if __name__ == '__main__':
+    sys.argv[0] = re.sub(r'(-script\.pyw|\.exe)?$', '', sys.argv[0])
+    sys.exit(main())

@@ -431,7 +431,7 @@ class TaskManagerApp(App):
 
     def delete_current_task(self, instance) -> None:
         ''' Deletes current task from the Task Details Screen '''
-        self.taskList.remove(self.current_task.name)
+        self.taskList.remove(self.current_task)
 
 
     def new_task(self, instance) -> None:

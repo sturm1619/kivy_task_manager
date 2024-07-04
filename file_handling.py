@@ -1,4 +1,3 @@
-
 import json
 from datetime import date
 from typing import Any
@@ -30,7 +29,7 @@ def write_json(task_list : TaskList, json_filepath : str) -> None:
         tasklist_with_dict.append(format_Task_as_dict(task))
 
     file = open(json_filepath, "w", encoding = "utf-8")
-    json.dump(tasklist_with_dict, file)
+    json.dump(tasklist_with_dict, file, indent = "\t")
 
 
 def read_json(json_filepath : str) -> TaskList:

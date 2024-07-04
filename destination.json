@@ -1,1 +1,18 @@
-[{"completion_status": "False", "title": "Do Homework", "description": "Do CS1410 Final Project", "due_date": "2024-04-26"}, {"completion_status": "False", "title": "Clean House", "description": "Clean kitchen and bathroom"}, {"title": "Hello WORLD", "completion_status": "False"}]
+[
+    {
+        "completion_status": "False", 
+        "title": "Do Homework", 
+        "description": "Do CS1410 Final Project", 
+        "due_date": "   "
+        }, 
+        
+    {
+        "completion_status": "False", 
+        "title": "Clean House", 
+        "description": "Clean kitchen and bathroom"},
+
+    {
+        "title": "Hello WORLD", 
+        "completion_status": "False"
+    }
+]
